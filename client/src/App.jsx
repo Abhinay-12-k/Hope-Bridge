@@ -22,7 +22,14 @@ const AdminProjects   = lazy(() => import('./pages/admin/AdminProjects'));
 const AdminGallery    = lazy(() => import('./pages/admin/AdminGallery'));
 const AdminVolunteers = lazy(() => import('./pages/admin/AdminVolunteers'));
 const AdminContacts   = lazy(() => import('./pages/admin/AdminContacts'));
+const AdminRegister   = lazy(() => import('./pages/admin/AdminRegister'));
+const AdminLayout     = lazy(() => import('./pages/admin/AdminLayout'));
+const AdminDonations  = lazy(() => import('./pages/admin/AdminDonations'));
+const AdminCampaigns  = lazy(() => import('./pages/admin/AdminCampaigns'));
+const AdminUsers      = lazy(() => import('./pages/admin/AdminUsers'));
+const AdminSettings   = lazy(() => import('./pages/admin/AdminSettings'));
 const SeedStore       = lazy(() => import('./pages/SeedStore'));
+const Donate          = lazy(() => import('./pages/Donate'));
 
 function PageWrapper({ children }) {
   return (
@@ -64,17 +71,27 @@ export default function App() {
               <Route path="/gallery"   element={<PageWrapper><Gallery   /></PageWrapper>} />
               <Route path="/contact"   element={<PageWrapper><Contact   /></PageWrapper>} />
               <Route path="/seed"      element={<PageWrapper><SeedStore /></PageWrapper>} />
+              <Route path="/donate"    element={<PageWrapper><Donate    /></PageWrapper>} />
 
               {/* Admin Routes */}
               <Route path="/admin/login" element={<PageWrapper><AdminLogin /></PageWrapper>} />
+              <Route path="/admin/register" element={<PageWrapper><AdminRegister /></PageWrapper>} />
               
               <Route element={<PrivateRoute />}>
-                <Route path="/admin"            element={<PageWrapper><AdminDashboard  /></PageWrapper>} />
-                <Route path="/admin/dashboard"  element={<PageWrapper><AdminDashboard  /></PageWrapper>} />
-                <Route path="/admin/projects"   element={<PageWrapper><AdminProjects   /></PageWrapper>} />
-                <Route path="/admin/gallery"    element={<PageWrapper><AdminGallery    /></PageWrapper>} />
-                <Route path="/admin/volunteers" element={<PageWrapper><AdminVolunteers /></PageWrapper>} />
-                <Route path="/admin/contacts"   element={<PageWrapper><AdminContacts   /></PageWrapper>} />
+                <Route element={<AdminLayout />}>
+                  <Route path="/admin"            element={<PageWrapper><AdminDashboard  /></PageWrapper>} />
+                  <Route path="/admin/dashboard"  element={<PageWrapper><AdminDashboard  /></PageWrapper>} />
+                  <Route path="/admin/projects"   element={<PageWrapper><AdminProjects   /></PageWrapper>} />
+                  <Route path="/admin/gallery"    element={<PageWrapper><AdminGallery    /></PageWrapper>} />
+                  <Route path="/admin/volunteers" element={<PageWrapper><AdminVolunteers /></PageWrapper>} />
+                  <Route path="/admin/donations"  element={<PageWrapper><AdminDonations  /></PageWrapper>} />
+                  <Route path="/admin/messages"   element={<PageWrapper><AdminContacts   /></PageWrapper>} />
+                  <Route path="/admin/campaigns"  element={<PageWrapper><AdminCampaigns  /></PageWrapper>} />
+                  <Route path="/admin/users"      element={<PageWrapper><AdminUsers      /></PageWrapper>} />
+                  <Route path="/admin/settings"   element={<PageWrapper><AdminSettings   /></PageWrapper>} />
+                  {/* Keep contacts backwards compatible */}
+                  <Route path="/admin/contacts"   element={<PageWrapper><AdminContacts   /></PageWrapper>} />
+                </Route>
               </Route>
 
               {/* 404 Route */}

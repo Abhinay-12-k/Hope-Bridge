@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { collection, query, getDocs, where } from 'firebase/firestore';
 import { db } from '../../firebase/config';
-import AdminSidebar from './AdminSidebar';
 import { Users, FolderKanban, Image as ImageIcon, Mail, Clock, CheckCircle, TrendingUp, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -51,10 +50,7 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="flex bg-[#fcfcfc] min-h-screen">
-      <AdminSidebar />
-      
-      <main className="flex-1 ml-64 p-12">
+    <div className="w-full">
         <header className="mb-12 flex justify-between items-end">
           <div className="space-y-4">
             <span className="text-accent font-bold uppercase tracking-[0.2em] text-[10px]">Command Center</span>
@@ -123,7 +119,6 @@ export default function AdminDashboard() {
               </div>
            </div>
         </section>
-      </main>
     </div>
   );
 }

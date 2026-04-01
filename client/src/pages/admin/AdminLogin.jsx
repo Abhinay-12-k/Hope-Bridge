@@ -57,6 +57,18 @@ export default function AdminLogin() {
             {loading ? <Loader2 className="animate-spin" size={18} /> : 'Authorize Access'}
           </button>
         </form>
+
+        <div className="mt-8 text-center">
+            <p className="text-[10px] font-bold text-primary/30 uppercase tracking-widest">
+              Don't have clearance? {' '}
+              <button 
+                onClick={() => navigate('/admin/register')}
+                className="text-accent hover:text-primary transition-colors hover:underline underline-offset-4 decoration-2"
+              >
+                Initialize Setup
+              </button>
+            </p>
+        </div>
       </motion.div>
     </div>
   );

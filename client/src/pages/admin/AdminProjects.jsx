@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, addDoc, deleteDoc, updateDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db, storage } from '../../firebase/config';
 import { useFirestore } from '../../hooks/useFirestore';
-import AdminSidebar from './AdminSidebar';
+
 import { Plus, Search, Edit2, Trash2, X, Loader2, Globe, Sparkles, Filter, MoreHorizontal, ChevronRight, LayoutGrid, List } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
@@ -85,9 +85,7 @@ export default function AdminProjects() {
   };
 
   return (
-    <div className="flex bg-[#fcfcfc] min-h-screen">
-      <AdminSidebar />
-      <main className="flex-1 ml-64 p-12">
+    <div className="w-full">
         <header className="mb-12 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
           <div className="space-y-4">
             <span className="text-accent font-bold uppercase tracking-[0.2em] text-[10px]">Global Initiatives</span>
@@ -178,7 +176,7 @@ export default function AdminProjects() {
              </div>
            )}
         </section>
-      </main>
+
 
       {/* --- ADD/EDIT MODAL --- */}
       <AnimatePresence>

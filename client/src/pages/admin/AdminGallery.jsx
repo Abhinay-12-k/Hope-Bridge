@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { collection, addDoc, deleteDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db, storage } from '../../firebase/config';
 import { useFirestore } from '../../hooks/useFirestore';
-import AdminSidebar from './AdminSidebar';
 import { Plus, Trash2, X, Loader2, Camera, Image as ImageIcon, ChevronRight, LayoutGrid, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
@@ -53,9 +52,7 @@ export default function AdminGallery() {
   };
 
   return (
-    <div className="flex bg-[#fcfcfc] min-h-screen">
-      <AdminSidebar />
-      <main className="flex-1 ml-64 p-12">
+    <div className="w-full">
         <header className="mb-12 flex justify-between items-end">
           <div className="space-y-4">
             <span className="text-accent font-bold uppercase tracking-[0.2em] text-[10px]">Visual Storytelling</span>
@@ -101,7 +98,7 @@ export default function AdminGallery() {
              <div className="py-20 flex justify-center"><Loader2 className="animate-spin text-primary/20" size={40} /></div>
            )}
         </section>
-      </main>
+
 
       {/* --- ADD MODAL --- */}
       <AnimatePresence>

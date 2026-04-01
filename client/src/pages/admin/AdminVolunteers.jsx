@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { updateDoc, doc, deleteDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useFirestore } from '../../hooks/useFirestore';
-import AdminSidebar from './AdminSidebar';
 import { Search, Download, Trash2, X, Loader2, ChevronRight, Filter, Users, UserCheck, UserX, MessageSquare, Briefcase, MapPin, Calendar, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
@@ -50,9 +49,7 @@ export default function AdminVolunteers() {
   };
 
   return (
-    <div className="flex bg-[#fcfcfc] min-h-screen">
-      <AdminSidebar />
-      <main className="flex-1 ml-64 p-12">
+    <div className="w-full">
         <header className="mb-12 flex justify-between items-end">
           <div className="space-y-4">
             <span className="text-accent font-bold uppercase tracking-[0.2em] text-[10px]">Human Resources</span>
@@ -133,7 +130,7 @@ export default function AdminVolunteers() {
              <div className="py-20 flex justify-center"><Loader2 className="animate-spin text-primary/20" size={40} /></div>
            )}
         </section>
-      </main>
+
 
       {/* --- DETAIL MODAL --- */}
       <AnimatePresence>

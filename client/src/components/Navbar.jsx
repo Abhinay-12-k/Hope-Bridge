@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Menu, X, ArrowRight } from 'lucide-react';
+import { Shield, Menu, X, ArrowRight, LayoutDashboard, LogIn } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -15,6 +16,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { isAdmin, user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,6 +66,21 @@ export default function Navbar() {
             </Link>
           ))}
           <Link
+            to="/donate"
+            className="flex items-center gap-2 border-2 border-accent text-accent px-5 py-2 rounded-full font-medium transition-all hover:bg-primary hover:text-white hover:border-primary group"
+          >
+            Donate
+          </Link>
+          
+          <Link
+            to={isAdmin ? "/admin/dashboard" : "/admin/login"}
+            className="flex items-center gap-2 border border-primary/10 bg-white/50 backdrop-blur-sm text-primary px-5 py-2 rounded-full font-medium transition-all hover:bg-primary hover:text-white group"
+          >
+            {isAdmin ? <LayoutDashboard className="w-4 h-4" /> : <Shield className="w-4 h-4" />}
+            {isAdmin ? 'Dashboard' : 'Admin'}
+          </Link>
+
+          <Link
             to="/volunteer"
             className="flex items-center gap-2 bg-primary text-white px-6 py-2.5 rounded-full font-medium transition-all hover:bg-accent group"
           >
@@ -102,6 +119,20 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
+              <Link
+                to="/donate"
+                className="flex items-center justify-center gap-2 border-2 border-accent text-accent px-6 py-3 rounded-full font-medium"
+              >
+                Donate
+              </Link>
+
+              <Link
+                to={isAdmin ? "/admin/dashboard" : "/admin/login"}
+                className="flex items-center justify-center gap-2 bg-gray-50 border border-gray-100 text-primary px-6 py-3 rounded-full font-medium"
+              >
+                {isAdmin ? 'Admin Dashboard' : 'Admin Login'}
+              </Link>
+
               <Link
                 to="/volunteer"
                 className="flex items-center justify-center gap-2 bg-primary text-white px-6 py-3 rounded-full font-medium"
