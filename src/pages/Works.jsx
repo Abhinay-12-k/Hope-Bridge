@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Hero3D from '../components/Hero3D';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ArrowRight, Globe, Filter, X } from 'lucide-react';
 import { useFirestore } from '../hooks/useFirestore';
@@ -25,6 +27,8 @@ export default function Works() {
 
       {/* --- HERO SECTION --- */}
       <section className="bg-primary pt-48 pb-32 text-center relative overflow-hidden">
+        <Hero3D />
+
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <motion.h1 initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-5xl md:text-8xl font-black text-white mb-6 uppercase tracking-tight">
             Our Global <span className="text-accent italic font-serif lowercase">Initiatives</span>

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Hero3D from '../components/Hero3D';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Phone, Mail, Send, CheckCircle, Loader2, MessageSquare } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -64,6 +66,8 @@ export default function Contact() {
 
       {/* --- HERO SECTION --- */}
       <section className="bg-primary pt-48 pb-32 text-center relative overflow-hidden">
+        <Hero3D />
+
         <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
            <MessageSquare size={400} className="absolute -bottom-20 -right-20 text-white" />
         </div>

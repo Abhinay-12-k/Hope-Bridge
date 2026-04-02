@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Hero3D from '../components/Hero3D';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -48,6 +50,8 @@ export default function Volunteer() {
 
       {/* --- HERO SECTION --- */}
       <section className="bg-primary pt-48 pb-32 text-center relative overflow-hidden">
+        <Hero3D />
+
         <div className="absolute inset-0 opacity-10 flex items-center justify-center pointer-events-none">
           <Heart size={400} className="text-white" />
         </div>

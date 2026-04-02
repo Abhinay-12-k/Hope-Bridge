@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
+import Hero3D from '../components/Hero3D';
+
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, AnimatePresence, useInView, useSpring } from 'framer-motion';
 import { ArrowRight, Shield, Heart, Globe, Users, CheckCircle, Quote } from 'lucide-react';
@@ -101,7 +103,9 @@ export default function Home() {
       />
 
       {/* --- HERO SECTION --- */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden mesh-gradient pt-20">
+      <section id="hero-section" className="relative h-auto min-h-screen md:min-h-screen flex items-center justify-center overflow-hidden mesh-gradient pt-32 pb-24">
+        <Hero3D />
+
         <div className="absolute inset-0 pointer-events-none opacity-20">
           <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <motion.path
@@ -180,6 +184,8 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+
 
       {/* --- IMPACT STATS BAR (Ticker) --- */}
       <div className="bg-accent py-4 overflow-hidden border-y border-accent-light/30">

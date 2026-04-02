@@ -1,62 +1,142 @@
-# HopeBridge NGO — Production Ready Platform
+# 🌉 HopeBridge NGO Website
 
-The HopeBridge NGO platform is now fully functional, production-ready, and integrated with a high-end Firebase backend.
+A full-stack NGO website with admin portal and donations system.
+Built with React + Vite + Firebase + TailwindCSS + Framer Motion.
 
-## 🚀 Key Features
+## 🔗 Live Demo
+[https://hopebridge-ngo.onrender.com](https://hopebridge-ngo.onrender.com)
 
-### 🖥️ Public Experience
-- **Real-time Data Delivery**: All projects, team members, and gallery assets are streamed live from Firebase Firestore.
-- **Functional Engagement**:
-  - **Volunteer HQ**: Secure registration with validation and success tracking.
-  - **Inquiry Portal**: Modern contact form with real-time Firestore persistence.
-  - **Impact Counters**: Dynamic statistics pulled directly from administrative settings.
-- **SEO & Performance**: Distinct meta tags and page titles for each route using `react-helmet-async`.
+## ✨ Features
+- Public website: Home, About, Works, Gallery, Donate, Contact, Volunteer
+- Admin portal with role-based access (superadmin / moderator)
+- Real-time volunteer management with approve/reject workflow
+- Donations system with campaign tracking
+- Image gallery with Firebase Storage
+- Contact form with admin inbox
+- Notification system
 
-### 🔒 Admin HQ Management Portal
-- **Dashboard**: Real-time stats visualization of all organizational metrics.
-- **Initiative Manager**: Full CRUD suite for global projects with Storage integration.
-- **Media Repository**: Asset management with captioning and category synchronization.
-- **Candidate Vetting**: Table-based volunteer management with status vetting (Approve/Reject).
-- **Communication Manager**: Inquiry tracking with response orchestration.
+## 🛠️ Tech Stack
+- **Frontend:** React 18, Vite, TailwindCSS, Framer Motion
+- **Backend:** Firebase (Firestore, Auth, Storage)
+- **Deployment:** Render (Static Site)
+- **Forms:** React Hook Form + Zod
+- **Charts:** Recharts
 
-## 🛠️ Setup Instructions
+## 🚀 Local Setup
 
-### 1. Environment Configuration
-Copy `.env.example` to `.env` in the `client` directory and populate your Firebase credentials.
+### 1. Clone the repository
+git clone https://github.com/Abhinay-12-k/hope-bridge-ngo
+cd hopebridge-ngo
 
-```bash
-VITE_FIREBASE_API_KEY=xxx
-VITE_FIREBASE_AUTH_DOMAIN=xxx
-VITE_FIREBASE_PROJECT_ID=xxx
-VITE_FIREBASE_STORAGE_BUCKET=xxx
-VITE_FIREBASE_MESSAGING_SENDER_ID=xxx
-VITE_FIREBASE_APP_ID=xxx
-```
-
-### 2. Dependency Management
-```bash
-cd client
+### 2. Install dependencies
 npm install
+
+### 3. Firebase Setup
+- Go to https://console.firebase.google.com
+- Create a new project: "hopebridge-ngo"
+- Enable these services:
+  - Authentication → Email/Password
+  - Firestore Database → Start in production mode
+  - Storage → Start in production mode
+- Go to Project Settings → Your Apps → Add Web App
+- Copy the config values
+
+### 4. Environment Variables
+cp .env.example .env
+# Fill in your Firebase values in .env
+
+### 5. Deploy Firestore Rules
+- Go to Firebase Console → Firestore → Rules
+- Copy and paste the rules from firestore.rules file
+- Click Publish
+
+### 6. Run locally
 npm run dev
-```
+# Opens at http://localhost:5173
 
-### 3. Creating the First Admin
-1. Go to the **Firebase Console** → **Authentication**.
-2. Click **Add User** and create an email/password account (e.g., `admin@hopebridge.org`).
-3. You can now log in at `/admin/login`.
+### 7. Create First Admin
+- Visit http://localhost:5173/admin/register
+- Create your superadmin account
+- Login at http://localhost:5173/admin/login
 
-### 4. Database Initialization
-Create a document in Firestore:
-- **Collection**: `settings`
-- **Document ID**: `global`
-- **Fields**:
-  - `heroSubtitle`: string
-  - `missionText`: string
-  - `visionText`: string
-  - `stats`: map { `families`: string, `volunteers`: string, `countries`: string, `years`: string }
+## 🌐 Deploy to Render
 
-## 📄 Deployment Guidelines
+### Step 1: Push to GitHub
+git init
+git add .
+git commit -m "Initial commit: HopeBridge NGO website"
+git branch -M main
+git remote add origin https://github.com/Abhinay-12-k/hope-bridge-ngo
+git push -u origin main
 
-- **Frontend**: Deploy to **Vercel** or **Netlify** with the `.env` variables configured in the dashboard.
-- **Security**: Apply the `firestore.rules` located in the root directory via the Firebase CLI or Console.
-- **Storage**: Initialize Firebase Storage in the console and set rules to allow `read: if true` and `write: if request.auth != null`.
+### Step 2: Connect to Render
+1. Go to https://render.com → Sign up/Login
+2. Click "New +" → "Static Site"
+3. Connect your GitHub account
+4. Select the hopebridge-ngo repository
+5. Configure:
+   - Name: hopebridge-ngo
+   - Branch: main
+   - Build Command: npm install && npm run build
+   - Publish Directory: dist
+6. Add Environment Variables (click "Environment"):
+   Add ALL variables from .env.example with your real values
+7. Click "Create Static Site"
+8. Wait 3-5 minutes for first deploy ✅
+
+### Step 3: Update Firebase Auth Domain
+- Firebase Console → Authentication → Settings → Authorized domains
+- Add your Render URL: hopebridge-ngo.onrender.com
+
+### Step 4: Update VITE_APP_URL
+- In Render dashboard → Environment
+- Update VITE_APP_URL to your actual Render URL
+- Trigger redeploy
+
+## 📁 Project Structure
+src/
+├── firebase/config.js       # Firebase initialization
+├── hooks/                   # Custom React hooks
+├── components/              # Shared components
+│   ├── Navbar.jsx
+│   ├── Footer.jsx
+│   └── ...
+├── pages/                   # All pages
+│   ├── Home.jsx
+│   ├── About.jsx
+│   ├── Works.jsx
+│   ├── Donate.jsx
+│   ├── Gallery.jsx
+│   ├── Volunteer.jsx
+│   ├── Contact.jsx
+│   └── admin/               # Admin portal
+│       ├── AdminLogin.jsx
+│       ├── AdminRegister.jsx
+│       ├── AdminDashboard.jsx
+│       ├── AdminVolunteers.jsx
+│       ├── AdminDonations.jsx
+│       └── ...
+└── App.jsx
+
+## 🔐 Admin Access
+- Register: /admin/register (first time only)
+- Login: /admin/login
+- Dashboard: /admin/dashboard
+
+## 📋 Firestore Collections
+| Collection | Description |
+|---|---|
+| volunteers | Volunteer applications |
+| donations | Donation records |
+| contacts | Contact form messages |
+| projects | NGO projects/works |
+| gallery | Photo gallery |
+| campaigns | Donation campaigns |
+| adminUsers | Admin accounts |
+| settings | Website settings |
+
+## 🤝 Contributing
+Pull requests welcome. Please open an issue first.
+
+## 📄 License
+MIT License — HopeBridge Foundation 2026

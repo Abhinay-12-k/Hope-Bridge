@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Hero3D from '../components/Hero3D';
+
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Target, Eye, ShieldCheck, Heart, Users, Globe, Zap, Award, Compass, Search, Sparkles } from 'lucide-react';
@@ -48,6 +50,8 @@ export default function About() {
 
       {/* --- HERO SECTION --- */}
       <section className="bg-primary pt-48 pb-32 text-center relative overflow-hidden">
+        <Hero3D />
+
         <div className="max-w-4xl mx-auto px-6 relative z-10">
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-8xl font-black text-white mb-6 uppercase tracking-tight">
             Who We <span className="text-accent italic font-serif lowercase">Are</span>

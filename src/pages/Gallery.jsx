@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Hero3D from '../components/Hero3D';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Maximize2, Camera } from 'lucide-react';
 import { useFirestore } from '../hooks/useFirestore';
@@ -47,6 +49,8 @@ export default function Gallery() {
 
       {/* --- HERO SECTION --- */}
       <section className="bg-primary pt-48 pb-32 relative overflow-hidden">
+        <Hero3D />
+
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/5 pointer-events-none select-none">
           <Camera size={400} />
         </div>

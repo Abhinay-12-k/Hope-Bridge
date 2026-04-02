@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Hero3D from '../components/Hero3D';
+
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -235,6 +237,8 @@ export default function Donate() {
     <div className="min-h-screen bg-bg pt-20">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary via-[#0a2e24] to-[#0d3b2e] py-20 px-6 text-white text-center">
+        <Hero3D />
+
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] animate-[pulse_10s_ease-in-out_infinite]"></div>
         
         <div className="relative z-10 max-w-4xl mx-auto">

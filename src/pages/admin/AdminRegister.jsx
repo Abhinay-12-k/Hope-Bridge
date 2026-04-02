@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Admin3D from '../../components/Admin3D';
+
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { collection, doc, getDocs, setDoc, getDoc, serverTimestamp, query, limit } from 'firebase/firestore';
 import { auth, db } from '../../firebase/config';
@@ -25,8 +27,11 @@ export default function AdminRegister() {
   const [submitting, setSubmitting] = useState(false);
   const [isFirstSetup, setIsFirstSetup] = useState(false);
   const [inviteData, setInviteData] = useState(null);
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
   
   const navigate = useNavigate();
+
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
 
@@ -122,8 +127,11 @@ export default function AdminRegister() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-primary p-6">
-      <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="bg-white p-12 rounded-[3.5rem] shadow-2xl max-w-md w-full relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-black p-6 relative isolate">
+      <Admin3D isInputFocused={isInputFocused} isButtonHovered={isButtonHovered} />
+      <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="bg-white/80 backdrop-blur-2xl p-12 rounded-[3.5rem] shadow-[0_0_60px_rgba(201,168,76,0.15)] border border-white/40 max-w-md w-full relative overflow-hidden z-10">
+
+
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         
         <div className="flex flex-col items-center gap-6 mb-10 text-center relative z-10">
@@ -145,7 +153,8 @@ export default function AdminRegister() {
             <label className="text-[10px] font-black uppercase tracking-widest text-primary/40 ml-4">Full Name</label>
             <div className="relative">
               <User className="absolute left-6 top-1/2 -translate-y-1/2 text-primary/20" size={18} />
-              <input type="text" {...register('name')} className="w-full bg-bg border-none rounded-full py-4 pl-14 pr-8 text-sm focus:ring-2 focus:ring-primary font-medium" placeholder="John Doe" />
+              <input type="text" {...register('name')} onFocus={() => setIsInputFocused(true)} onBlur={() => setIsInputFocused(false)} className="w-full bg-bg border-none rounded-full py-4 pl-14 pr-8 text-sm focus:ring-2 focus:ring-primary font-medium" placeholder="John Doe" />
+
             </div>
             {errors.name && <p className="text-red-500 text-xs ml-4 font-bold">{errors.name.message}</p>}
           </div>
@@ -154,7 +163,8 @@ export default function AdminRegister() {
             <label className="text-[10px] font-black uppercase tracking-widest text-primary/40 ml-4">Email Address</label>
             <div className="relative">
               <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-primary/20" size={18} />
-              <input type="email" {...register('email')} disabled={!!inviteData} className="w-full bg-bg border-none rounded-full py-4 pl-14 pr-8 text-sm focus:ring-2 focus:ring-primary font-medium disabled:opacity-50" placeholder="admin@hopebridge.org" />
+              <input type="email" {...register('email')} disabled={!!inviteData} onFocus={() => setIsInputFocused(true)} onBlur={() => setIsInputFocused(false)} className="w-full bg-bg border-none rounded-full py-4 pl-14 pr-8 text-sm focus:ring-2 focus:ring-primary font-medium disabled:opacity-50" placeholder="admin@hopebridge.org" />
+
             </div>
             {errors.email && <p className="text-red-500 text-xs ml-4 font-bold">{errors.email.message}</p>}
           </div>
@@ -163,7 +173,8 @@ export default function AdminRegister() {
             <label className="text-[10px] font-black uppercase tracking-widest text-primary/40 ml-4">Password</label>
             <div className="relative">
               <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-primary/20" size={18} />
-              <input type="password" {...register('password')} className="w-full bg-bg border-none rounded-full py-4 pl-14 pr-8 text-sm focus:ring-2 focus:ring-primary font-medium" placeholder="Min 8 characters" />
+              <input type="password" {...register('password')} onFocus={() => setIsInputFocused(true)} onBlur={() => setIsInputFocused(false)} className="w-full bg-bg border-none rounded-full py-4 pl-14 pr-8 text-sm focus:ring-2 focus:ring-primary font-medium" placeholder="Min 8 characters" />
+
             </div>
             {errors.password && <p className="text-red-500 text-xs ml-4 font-bold">{errors.password.message}</p>}
           </div>
@@ -172,12 +183,14 @@ export default function AdminRegister() {
             <label className="text-[10px] font-black uppercase tracking-widest text-primary/40 ml-4">Confirm Password</label>
             <div className="relative">
               <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-primary/20" size={18} />
-              <input type="password" {...register('confirmPassword')} className="w-full bg-bg border-none rounded-full py-4 pl-14 pr-8 text-sm focus:ring-2 focus:ring-primary font-medium" placeholder="••••••••" />
+              <input type="password" {...register('confirmPassword')} onFocus={() => setIsInputFocused(true)} onBlur={() => setIsInputFocused(false)} className="w-full bg-bg border-none rounded-full py-4 pl-14 pr-8 text-sm focus:ring-2 focus:ring-primary font-medium" placeholder="••••••••" />
+
             </div>
             {errors.confirmPassword && <p className="text-red-500 text-xs ml-4 font-bold">{errors.confirmPassword.message}</p>}
           </div>
 
-          <button type="submit" disabled={submitting} className="w-full bg-primary hover:bg-black text-white font-bold py-5 rounded-full uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-3 shadow-2xl shadow-primary/20 mt-8 disabled:opacity-50">
+          <button type="submit" disabled={submitting} onMouseEnter={() => setIsButtonHovered(true)} onMouseLeave={() => setIsButtonHovered(false)} className="w-full bg-primary hover:bg-black text-white font-bold py-5 rounded-full uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-3 shadow-2xl shadow-primary/20 mt-8 disabled:opacity-50">
+
             {submitting ? <Loader2 className="animate-spin" size={18} /> : (isFirstSetup ? 'Initialize System' : 'Create Account')}
           </button>
         </form>
