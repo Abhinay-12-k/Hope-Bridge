@@ -4,7 +4,7 @@ A full-stack NGO website with admin portal and donations system.
 Built with React + Vite + Firebase + TailwindCSS + Framer Motion.
 
 ## 🔗 Live Demo
-[https://hopebridge-ngo.onrender.com](https://hopebridge-ngo.onrender.com)
+[https://hopebridge-ngo.onrender.com](https://hope-bridge-ngo.onrender.com/)
 
 ## ✨ Features
 - Public website: Home, About, Works, Gallery, Donate, Contact, Volunteer
